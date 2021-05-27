@@ -40,21 +40,21 @@ api = authentication('./auth.k')
 
 
 results = pd.DataFrame(columns=['username', 'location', 'following',
-                                'followers', 'totaltweets',
-                                'whentweetcreated', 'whenacctcreated',
-                                'retweets', 'text', 'hashtags'])
+                                'followers', 'whentweetcreated',
+                                'whenacctcreated', 'retweets',
+                                'text', 'hashtags'])
 
 # In[ ]:
 
 
-dataset_name = " "
-search_words = " "
+dataset_name = "sputnik_biontech_sinovac"
+search_words = "biontech OR sputnik OR sinovac"
 language = "en"  # tr or en
 
 program_start = time.time()
 exact_program_start = datetime.now()
 
-for i in range(8):
+for i in range(6):
 
     run_start = time.time()
     exact_run_start = datetime.now()
@@ -63,7 +63,7 @@ for i in range(8):
           'at {}'.format(i, exact_run_start.strftime("%H:%M:%S")))
 
     tweets = tw.Cursor(api.search, q=search_words, lang=language,
-                       since='2021-03-19', tweet_mode='extended').items(2500)
+                       since='2021-05-15', tweet_mode='extended').items(2500)
 
     tweet_list = [tweet for tweet in tweets]
 
@@ -73,7 +73,6 @@ for i in range(8):
         location = tweet.user.location
         following = tweet.user.friends_count
         followers = tweet.user.followers_count
-        totaltweets = tweet.user.statuses_count
         whentweetcreated = tweet.created_at
         whenacctcreated = tweet.user.created_at
         retweets = tweet.retweet_count
@@ -84,7 +83,7 @@ for i in range(8):
             text = tweet.full_text
 
         myTweet = [username, location, following,
-                   followers, totaltweets,
+                   followers,
                    whentweetcreated, whenacctcreated,
                    retweets, text, hashtags]
         results.loc[len(results)] = myTweet
@@ -104,7 +103,7 @@ for i in range(8):
 
     time.sleep(920)  # 15 mins cooldown because of error 429
 
-timestamp = datetime.today().strftime('%Y%m%d')
+timestamp = datetime.today().strftime('%Y%m%d_%H%M')
 
 filename = './datasets/raw/' + timestamp + '_' + dataset_name + '.csv'
 

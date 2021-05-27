@@ -1,4 +1,8 @@
 .vscode
-venv
 old
 auth.k
+bearer_token.txt
+.ipynb_checkpoints
+samples.xlsx
+top-tweets.xlsx
+datasets/raw
