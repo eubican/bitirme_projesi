@@ -6,7 +6,3 @@ bearer_token.txt
 samples.xlsx
 top-tweets.xlsx
 datasets/raw
-datasets/vaccination_all_tweets.csv
-datasets/vaccines-labeled-lexicon.csv
-datasets/vaccines-labeled-manual.csv
-datasets/vaccines-to-sent-classify.csv
